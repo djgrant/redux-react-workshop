@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Redux Workshop | Playground</title>
+    <title>React Workshop | Playground</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="lib/babel.js"></script>
     <script src="lib/lodash.js"></script>
@@ -13,25 +13,23 @@
     <div id="root"></div>
 
     <script type="text/babel">
-    var app = arr => {
-      return (
-        <ul>
-          {arr.map(item => (
-            <li>{item}</li>
-          ))}
-        </ul>
-      )
-    }
-
-    var arr = ['test'];
-    setInterval(function () {
-      arr = arr.length < 10 ? [...arr, 'test'] : [];
-      React.render(
-        document.getElementById('root'),
-        app(arr)
-      );
-    }, 50);
-
+      var app = arr => {
+        return (
+          <ul>
+            {arr.map(item => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        )
+      };
+      var arr = ['test'];
+      setInterval(function () {
+        arr = arr.length < 10 ? [...arr, 'test'] : [];
+        React.render(
+          document.getElementById('root'),
+          app(arr)
+        );
+      }, 50);
     </script>
   </body>
 </html>
