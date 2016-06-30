@@ -1,16 +1,3 @@
-/*
- * If you've not yet read the readme on Redux, head over there first
- * If you've already read the readme, hi again!
- *
- * In this challenge we'll write a store factory function
- *
- * It needs to:
- * - Hold the current state
- * - Create a new version of the state when an action is dispatched into it
- * - Call subscribers when the state changes
- */
-
-
 /**
  * createStore()
  *
@@ -20,14 +7,21 @@
  * @return {object} store instance
  */
 
-function createStore (initialState, reducer) {
-  // Your code...
-  var getState = function () {};
-  var dispatch = function () {};
-  var subscribe = function () {};
+ function createStore (initialState, reducer) {
+   var state = intialState;
+   var listeners = [];
 
-  return { getState, dispatch, subscribe };
-}
+   var getState = () => state;
+
+   var dispatch = action => {
+     state = reducer(state, action);
+     listeners.forEach(l => l());
+   };
+
+   var subscribe = l => listeners.push(l);
+
+   return { getState, dispatch, subscribe };
+ }
 
 
 /*
@@ -41,13 +35,45 @@ function createStore (initialState, reducer) {
  * @return {object} new state
  */
 
-function reducer (state, action) {
-  // Your code...
-  return state;
-}
+ function reducer (state, action) {
+   return {
+     count: countReducer(state.count, action),
+     todos: todoReducer(state.todos, action)
+   };
+ }
+
+ function countReducer(state, action) {
+   if (action.type === 'INCREMENT') {
+     return state + 1;
+   }
+   if (action.type === 'DECREMENT') {
+     var newCount = state - 1;
+     return newCount > -1 ? newCount : state;
+   }
+   return state;
+ }
+
+ function todoReducer(state, action) {
+   if (action.type === 'ADD_TODO') {
+     return [...state, {
+       id: action.id,
+       text: action.text,
+       completed: false
+     }];
+   }
+   if (action.type === 'REMOVE_TODO') {
+     return [...state].filter(todo => todo.id !== action.id);
+   }
+   if (action.type === 'TOGGLE_TODO') {
+     return [...state].map(todo => Object.assign({}, todo, {
+       completed: !todo.compeleted
+     }));
+   }
+   return state;
+ }
 
 /*
- * Example initialisation
+ * Initialise for playground
  */
 
 var initialState = {
