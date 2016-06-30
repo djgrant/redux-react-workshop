@@ -1,13 +1,3 @@
-/*
- * This one's a little tricky so make sure you go through the readme first
- * If you've already done that, welcome to the challenge...
- *
- * We'll be writing some functions that
- * - generate a virtual DOM tree
- * - convert the virtual DOM tree into a real DOM tree
- * - render the virtual DOM into the browser document
- */
-
 var React = {};
 
 /*
@@ -26,7 +16,7 @@ var React = {};
 
 React.createElement = function (type, props, children) {
   children = _.flatten(children); // edge case
-  return {};
+  return { type, props, children };
 };
 
 
@@ -50,6 +40,12 @@ React.convertToDOMTree = function (tree) {
   if (typeof tree === 'string') {
     return createTextNode(tree);
   }
+  var { type, children } = tree;
+  var node = createNode(type);
+  children
+    .map(React.convertToDOMTree)
+    .forEach(child => insertInNode(node, child));
+  return node;
 };
 
 
@@ -62,4 +58,8 @@ React.convertToDOMTree = function (tree) {
  */
 
 React.render = function (node, tree) {
+  while (node.hasChildNodes()) {
+    node.removeChild(node.lastChild);
+  }
+  node.appendChild(React.convertToDOMTree(tree));
 };
