@@ -3,10 +3,29 @@
   <head>
     <title>Redux Workshop | Playground</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="lib/babel.js"></script>
+    <script src="lib/lodash.js"></script>
     <script src="lib/jquery.js"></script>
     <script src="src/helpers.js"></script>
     <script src="src/redux.js"></script>
   </head>
   <body>
+    <button id="playTodos">What am I doing today?</button>
+    <script>
+    document.getElementById('playTodos').addEventListener('click', function () {
+      var state = store.getState();
+      if (state.todos) {
+        speak('Here are your todos for today');
+        state.todos.forEach(function (todo) {
+          speak(todo.text);
+        });
+      }
+    });
+    store.dispatch({ type: 'ADD_TODO', id: 0, text: 'Pick up the milk' });
+    store.subscribe(function () {
+      speak('A change was made to your todo list!');
+    });
+    store.dispatch({ type: 'ADD_TODO', id: 1, text: 'Have fun in the playground' });
+    </script>
   </body>
 </html>
