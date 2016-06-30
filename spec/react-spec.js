@@ -50,10 +50,14 @@ describe('React', function(){
   });
   context('React.render', function () {
     var DOMTree = React.convertToDOMTree(list);
+    var root = document.createElement('div');
     it('renders the virtual tree as a DOM tree in a given element', function () {
-      var root = document.createElement('div');
       React.render(root, list);
       expect(root.children[0].toString()).to.equal('[object HTMLUListElement]');
+    });
+    it('re-renders', function () {
+      React.render(root, list);
+      expect(root.children.length).to.equal(1);
     });
   })
 });
