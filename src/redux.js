@@ -20,7 +20,7 @@
  * @return {object} store instance
  */
 
-function createStore (intialState, reducer) {
+function createStore (initialState, reducer) {
   // Your code...
   var getState = function () {};
   var dispatch = function () {};
