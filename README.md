@@ -26,18 +26,20 @@ For JS apps:
 - Doesn't need to be JavaScript, we could write this in any language
 
 What does this look like in practice?
-- store.getState() // returns the current state
-- store.dispatch(action) // dispatches an action ({ type: STRING, ...params }) into the store
-- store.subscribe(listener) // subscribes a listener to state changes
+- `store.getState()` - returns the current state
+- `store.dispatch(action)` - dispatches an action ({ type: STRING, ...params }) into the store
+- `store.subscribe(listener)` - subscribes a listener to state changes
 
 <!-- Interactive box model -->
 
 Right, enough talk, let's build a Redux!
 
 `$ open reduxSpec.html`
+
 Then, in your IDE open src/redux.js where we'll continue the lesson over there!
 
 
 ## Credits & resources
-[Redux](http://redux.js.org)
+[Redux repo](http://redux.js.org)
+
 [Getting start with Redux screencast](https://egghead.io/courses/getting-started-with-redux)
