@@ -55,7 +55,7 @@ Take the following HTML:
 </ul>
 ```
 
-How would you represent this as a hash?
+How would you represent this as an object?
 
 ```js
 {
@@ -107,7 +107,7 @@ Enough chatter! Let's code!
 
 `$ open react-spec.html` (or `$ npm i http-server -g && http-server`)
 
-And then meet me over at src/redux.js
+And then meet me over at src/react.js
 
 ## Inspiration
 http://redux.js.org
